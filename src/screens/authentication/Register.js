@@ -78,7 +78,7 @@ class Register extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <View>
-          <Text style={styles.textStyle}>Oya Send</Text>
+          <Text style={styles.textStyle}>Easy Pay</Text>
         </View>
         <Formik
           initialValues={{ email: "", password: "" }}
