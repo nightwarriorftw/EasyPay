@@ -1,5 +1,5 @@
 import firebase from "firebase";
-export const firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyBcGJ9XMUZ-7Jwx7WW4Q5GWGN240lZXvzg",
     authDomain: "easypay-a648e.firebaseapp.com",
     databaseURL: "https://easypay-a648e.firebaseio.com",
@@ -11,4 +11,4 @@ export const firebaseConfig = {
   };
 
 
-firebase.initializeApp(firebaseConfig);
+export default firebase.initializeApp(firebaseConfig);

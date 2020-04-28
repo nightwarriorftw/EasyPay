@@ -14,13 +14,11 @@ import FormInput from "../../components/FormInput";
 import ErrorMessage from "../../components/ErrorMessage";
 import * as api from "../../api";
 import * as Utils from "../../utils";
+import firebase from 'firebase';
 
 //form validation with yup
 const validationSchema = Yup.object().shape({
-  phoneNumber: Yup.string()
-    .label("Phone")
-    .required()
-    .min(11, "Phone number must be at least 11 numbers"),
+  email: Yup.string().email(),
   password: Yup.string()
     .label("Password")
     .required()
@@ -48,14 +46,14 @@ class Login extends Component {
 
   // handleOnLogin = () => this.props.navigation.navigate('App');
   handleOnLogin = async (values, actions) => {
-    const { phone, password } = values;
+    const { email, password } = values;
     try {
-      // const response = await api.login({ phone, password });
+      // const response = await api.login({ email, password });
       // await Utils.setStorageData(response);
 
       const response = await firebase
         .auth()
-        .signInWithEmailAndPassword(phone, password);
+        .signInWithEmailAndPassword(email, password);
       if (response.user) {
         this.props.navigation.navigate("Bvn");
       }
@@ -74,7 +72,7 @@ class Login extends Component {
           <Text style={styles.textStyle}>Welcome back</Text>
         </View>
         <Formik
-          initialValues={{ phoneNumber: "", password: "" }}
+          initialValues={{ emailNumber: "", password: "" }}
           onSubmit={(values, actions) => {
             this.handleOnLogin(values, actions);
           }}
@@ -92,16 +90,16 @@ class Login extends Component {
           }) => (
             <Fragment>
               <FormInput
-                name="phoneNumber"
-                value={values.phoneNumber}
-                onChangeText={handleChange("phoneNumber")}
-                placeholder="Enter Phone Number"
+                name="email"
+                value={values.email}
+                onChangeText={handleChange("email")}
+                placeholder="Enter email"
                 autoCapitalize="none"
                 iconName="ios-call"
                 iconColor="#9C27B0"
-                onBlur={handleBlur("phoneNumber")}
+                onBlur={handleBlur("email")}
               />
-              <ErrorMessage errorValue={touched.phone} />
+              <ErrorMessage errorValue={touched.email} />
               <FormInput
                 name="password"
                 value={values.password}

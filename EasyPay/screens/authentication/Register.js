@@ -14,15 +14,11 @@ import FormInput from "../../components/FormInput";
 import ErrorMessage from "../../components/ErrorMessage";
 import * as api from "../../api";
 import * as Utils from "../../utils";
+import firebase from '../../config/ApiKeys';
 
 //form validation with yup
 const validationSchema = Yup.object().shape({
-  phoneNumber: Yup.number()
-    .label("Phone")
-    .required()
-    .positive()
-    .integer()
-    .min(11, "Phone number must be at least 11 numbers"),
+  email: Yup.string().email(),
   password: Yup.string()
     .label("Password")
     .required()
@@ -49,13 +45,13 @@ class Register extends Component {
   };
 
   handleOnRegister = async (values, actions) => {
-    const { phoneNumber, password } = values;
+    const { email, password } = values;
     try {
-      // const response = await api.register({ phone: phoneNumber, password });
+      // const response = await api.register({ phone: email, password });
       // await Utils.setStorageData(response);
       const response = await firebase
         .auth()
-        .createUserWithEmailAndPassword(phoneNumber, password);
+        .createUserWithEmailAndPassword(email, password);
 
       if (response.user.uid) {
         const { uid } = response.user;
@@ -85,7 +81,7 @@ class Register extends Component {
           <Text style={styles.textStyle}>Oya Send</Text>
         </View>
         <Formik
-          initialValues={{ phoneNumber: "", password: "" }}
+          initialValues={{ email: "", password: "" }}
           onSubmit={(values, actions) => {
             this.handleOnRegister(values, actions);
           }}
@@ -103,16 +99,16 @@ class Register extends Component {
           }) => (
             <Fragment>
               <FormInput
-                name="phoneNumber"
-                value={values.phoneNumber}
-                onChangeText={handleChange("phoneNumber")}
-                placeholder="Enter Phone Number"
+                name="email"
+                value={values.email}
+                onChangeText={handleChange("email")}
+                placeholder="Enter Email"
                 autoCapitalize="none"
-                iconName="ios-call"
+                iconName="ios-email"
                 iconColor="#9C27B0"
-                onBlur={handleBlur("phoneNumber")}
+                onBlur={handleBlur("email")}
               />
-              <ErrorMessage errorValue={touched.phone && errors.phone} />
+              <ErrorMessage errorValue={touched.email && errors.email} />
               <FormInput
                 name="password"
                 value={values.password}
