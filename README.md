@@ -1,23 +1,23 @@
-# Node.js & Passport Login
+# shopping-cart
 
-This is a user login and registration app using Node.js, Express, Passport, Mongoose, EJS and some other packages.
+This is a shopping cart app with user authentication based on the Academind YouTube series NodeJS / Express / MongoDB - Build a Shopping Cart by Academind https://www.youtube.com/watch?v=-3vvxn78MH4&list=PL55RiY5tL51rajp7Xr_zk-fCFtzdlGKUp&index=2
 
-### Version: 2.0.0
+    Node.js
+    Express
+    Express Messages, Session, Connect Flash & Validation
+    MongoDB & Mongoose
+    Bootstrap
+    Passport.js Authentication
+    BCrypt Hashing
+    Stripe online payment processing
 
-### Usage
+Version
+1.0.0
 
-```sh
+Install the dependencies
+
 $ npm install
-```
 
-```sh
+Run app
+
 $ npm start
-# Or run with Nodemon
-$ npm run dev
-
-# Visit http://localhost:5000
-```
-
-### MongoDB
-
-Open "config/keys.js" and add your MongoDB URI, local or Atlas
