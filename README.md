@@ -1,19 +1,23 @@
-# EasyPay
-![Maintained](https://img.shields.io/maintenance/yes/2020?style=for-the-badge&logo=github)![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%99%A5-red?style=for-the-badge&logo=open-source-initiative) ![Built with Love](https://img.shields.io/badge/Built%20With-%E2%99%A5-critical?style=for-the-badge&logo=ko-fi)
+# Node.js & Passport Login
 
-## Development Environment
+This is a user login and registration app using Node.js, Express, Passport, Mongoose, EJS and some other packages.
 
- **Clone the Repo**
- ```BASH
- git clone EasyPay
- ```
- **Intall the Dependencies**
- ```BASH
- npm install
- ```
- 
-**Run the applicaton**
-```BASH
-expo start
+### Version: 2.0.0
+
+### Usage
+
+```sh
+$ npm install
 ```
-*To run on browser user `-w` flag and on mobile device use `-a` flag after the above command*
+
+```sh
+$ npm start
+# Or run with Nodemon
+$ npm run dev
+
+# Visit http://localhost:5000
+```
+
+### MongoDB
+
+Open "config/keys.js" and add your MongoDB URI, local or Atlas
