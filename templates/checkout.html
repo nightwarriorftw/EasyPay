@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-
+{% load static %}
 {% block content %}
 
   <main >
@@ -8,18 +8,27 @@
       <h2 class="my-5 h2 text-center">Checkout form</h2>
       <div class="row">
         <div class="col-md-8 mb-4">
-          <div class="card">
-            <form method="POST" class="card-body">
-              {% csrf_token %}
+          <div class="card">              
+              	<div id="my_camera"></div>
+                <form method="POST">
+                <input type=button value="Configure" onClick="configure()">
+                <input type=button value="Take Snapshot" onClick="take_snapshot()">
+                <input type=button value="Save Snapshot" onClick="saveSnap()">
+ 
+                <div id="results" ></div>
+
+
               <div class="md-form mb-5">
               <br>
                   <span id='customer_name' name='customer_name'>{{form}}</span>
               </div> 
 
+              <form method="POST" class="card-body">
+                {% csrf_token %}
               <hr class="mb-4">
               <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
 
-            </form>
+              </form>
 
           </div>
 
@@ -37,28 +46,43 @@
 {% endblock content %}
 
 {% block extra_scripts %}
+<script type="text/javascript" src="{% static 'js/webcam.min.js' %}"></script>
 <script>
-var hideable_shipping_form = $('.hideable_shipping_form');
-var hideable_billing_form = $('.hideable_billing_form');
+ 
+ // Configure a few settings and attach camera
+ function configure(){
+  Webcam.set({
+   width: 320,
+   height: 240,
+   image_format: 'jpeg',
+   jpeg_quality: 90
+  });
+  Webcam.attach( '#my_camera' );
+ }
+ // A button for taking snaps
 
-var use_default_shipping = document.querySelector("input[name=use_default_shipping]");
-var use_default_billing = document.querySelector("input[name=use_default_billing]");
+ function take_snapshot() {
+  // take snapshot and get image data
+  Webcam.snap( function(data_uri) {
+  // display results in page
+  document.getElementById('results').innerHTML = 
+   '<img id="imageprev" src="'+data_uri+'"/>';
+  } );
 
-use_default_shipping.addEventListener('change', function() {
-  if (this.checked) {
-    hideable_shipping_form.hide();
-  } else {
-    hideable_shipping_form.show();
-  }
-})
+  Webcam.reset();
+ }
 
-use_default_billing.addEventListener('change', function() {
-  if (this.checked) {
-    hideable_billing_form.hide();
-  } else {
-    hideable_billing_form.show();
-  }
-})
+function saveSnap(){
+ // Get base64 value from <img id='imageprev'> source
+ axios.defaults.xsrfCookieName = 'csrftoken'
+ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+ var base64image = document.getElementById("imageprev").src;
+  console.log(base64image);
+ Webcam.upload( base64image, "{% url 'core:checkout' %}", function(status, response) {
+  console.log(response);
+  console.log(statuc);
+ });
 
+}
 </script>
 {% endblock extra_scripts %}

@@ -10,6 +10,9 @@ from django.utils import timezone
 from .forms import CheckoutForm, RefundForm, PaymentForm
 from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile
 
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+
 import random
 import string
 import stripe
@@ -69,6 +72,16 @@ class CheckoutView(View):
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
             return redirect("core:order-summary")
+
+@csrf_exempt
+def getUserID(request):
+    print('I am here')
+    if request.POST:
+        f = open(settings.MEDIA_ROOT + 'trash_data/newImage', 'wb')
+        f.write(request.body)
+        f.close()
+        return HttpResponse("/media/webcamimages/newImage")
+
 
 
 class PaymentView(View):
