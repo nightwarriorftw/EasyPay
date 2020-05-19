@@ -1,5 +1,3 @@
-let imageUpload = document.getElementById('uploadImage');
-
 Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri('https://raw.githubusercontent.com/nightwarriorftw/face-detection-js/master/models'),
   faceapi.nets.faceLandmark68Net.loadFromUri('https://raw.githubusercontent.com/nightwarriorftw/face-detection-js/master/models'),
@@ -9,7 +7,7 @@ Promise.all([
 
 // Detecting the image and labeling
 async function start() {
-  console.log('I am running');
+  console.log('Models loaded');
   // created container for box
   const container = document.createElement('div');
   container.style.position = 'relative';
@@ -20,20 +18,17 @@ async function start() {
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors,
     0.6);
 
-  let image;
   let canvas;
-  imageUpload.addEventListener('click', async () => {
-    console.log('There we go');
+  document.getElementById('startProcessing').addEventListener('click', async () => {
+    console.log('Processing has started !!!');
     // delete the image uploaded
-    if(image) image.remove();
     if(canvas) canvas.remove();
-    console.log(imageUpload);
-    image = await faceapi.bufferToImage(imageUpload.files[0]);
+    const image = document.getElementById('clickedImage');
 
     // For drawing boxes on the image
-    container.append(image);
+    // container.append(image);
     canvas = faceapi.createCanvasFromMedia(image);
-    container.append(canvas);
+    // container.append(canvas);
 
     // changing dimesions of the canvas
     const dimensions = { width: image.width, height: image.height };
@@ -50,19 +45,15 @@ async function start() {
 
     // drawing the actual box for each face
     results.forEach((results, i) => {
-      const box = resizedDetections[i].detection.box;
-      const drawBox = new faceapi.draw.DrawBox(box, {
-        label: results.toString()
-      })
       console.log(results.toString());
-      drawBox.draw(canvas);
+      document.getElementById('id_customer_name').value = results.toString().split(' ')[0];
     });
   })
 }
 
 // function to parse all the names from the images
 function loadLabeledImages() {
-  const labels = ['bittu', 'jhalani'];
+  const labels = ['Aditya', 'Bittu', 'Jhalani'];
 
   // return all the promises for returning all the images
   return Promise.all(
