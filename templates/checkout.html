@@ -15,7 +15,14 @@
                 <input type=button value="Take Snapshot" onClick="take_snapshot()">
                 <input type=button value="Save Snapshot" onClick="saveSnap()">
  
-                <div id="results" ></div>
+                <!--div id="results" ></div-->
+              <!--
+                Face Detection
+              -->
+              <!--div id="results"></div>
+              <div id="imageUpload"></div-->
+              <br>
+              <img id="uploadImage" src="#" />
 
 
               <div class="md-form mb-5">
@@ -65,24 +72,15 @@
   // take snapshot and get image data
   Webcam.snap( function(data_uri) {
   // display results in page
-  document.getElementById('results').innerHTML = 
-   '<img id="imageprev" src="'+data_uri+'"/>';
-  } );
+  const i = document.getElementById('uploadImage');
+  i.src = data_uri;
+  });
 
   Webcam.reset();
  }
-
-function saveSnap(){
- // Get base64 value from <img id='imageprev'> source
- axios.defaults.xsrfCookieName = 'csrftoken'
- axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
- var base64image = document.getElementById("imageprev").src;
-  console.log(base64image);
- Webcam.upload( base64image, "{% url 'core:checkout' %}", function(status, response) {
-  console.log(response);
-  console.log(statuc);
- });
-
-}
 </script>
+
+<script deref src="{% static 'js/face-api.min.js' %}"></script>
+<script deref src="{% static 'js/script.js' %}"></script>
+
 {% endblock extra_scripts %}
