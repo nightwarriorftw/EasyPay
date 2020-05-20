@@ -34,8 +34,26 @@
                     <br>
                     <br>
                     <span id='customer_name' name='customer_name'>{{form}}</span>
-                  </div> 
-                    <br>
+                  </div>
+                  <div class="md-form mb-5">
+                  <br>
+                  <br>
+                  <span id="upi_key" name='customer_upi_key'>
+                      <label for='id_upi_key' class>Upi Key</label>
+                      <input type='text' name='customer_upi_key' id='id_upi_key'/ >
+                  </span> 
+                  </div>
+
+                  <div class="md-form mb-5">
+                  <br>
+                  <br>
+                  <span id="upi_pin" name='customer_upi_pin'>
+                      <label for='id_upi_pin' class>PIN</label>
+                      <input type='password' name='customer_upi_pin' id='id_upi_pin'/ >
+                  </span> 
+                  </div>
+
+                  <br>
                   <div>
                    <tr>
                     <td colspan="4">Order Total</td>&nbsp
@@ -97,7 +115,7 @@
 
 <script deref src="{% static 'js/face-api.min.js' %}"></script>
 <script defer>
-  let modelURL = "{% static 'js/models' %}";
+  const modelURL = "{% static 'js/models' %}";
 </script>
 <script deref src="{% static 'js/script.js' %}"></script>
 

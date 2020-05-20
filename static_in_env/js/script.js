@@ -1,3 +1,4 @@
+
 Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri(modelURL),
   faceapi.nets.faceLandmark68Net.loadFromUri(modelURL),
@@ -44,11 +45,14 @@ async function start() {
     const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
 
     const customerNameField = document.getElementById('id_customer_name');
+    const customerUPI = document.getElementById('id_upi_key');
 
     // drawing the actual box for each face
     results.forEach((results, i) => {
-      console.log(results.toString());
-      customerNameField.value = results.toString().split(' ')[0];
+      console.log(results.toString().split('-')[0]);
+      customerNameField.value = results.toString().split('-')[0];
+      customerUPI.value = results.toString().split('-')[1].split(' ')[0];
+      console.log('Confidence level-', results.toString().split('-')[1].split(' ')[1]);
     });
 
     if(customerNameField.value===""){
@@ -62,7 +66,7 @@ async function start() {
 
 // function to parse all the names from the images
 function loadLabeledImages() {
-  const labels = ['Aditya', 'Bittu', 'Jhalani', 'TwilightBoy'];
+  const labels = ['Aditya-adi@sbi', 'Bittu-bittu@sbi', 'Jhalani-jhalo@sbi', 'TwilightBoy-hellboy@sbi'];
 
   // return all the promises for returning all the images
   return Promise.all(
