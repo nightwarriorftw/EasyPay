@@ -66,6 +66,8 @@
 
 {% block extra_scripts %}
 <script type="text/javascript" src="{% static 'js/webcam.min.js' %}"></script>
+
+
 <script>
  
  // Configure a few settings and attach camera
@@ -94,6 +96,9 @@
 </script>
 
 <script deref src="{% static 'js/face-api.min.js' %}"></script>
+<script defer>
+  let modelURL = "{% static 'js/models' %}";
+</script>
 <script deref src="{% static 'js/script.js' %}"></script>
 
 {% endblock extra_scripts %}

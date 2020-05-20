@@ -1,7 +1,7 @@
 Promise.all([
-  faceapi.nets.faceRecognitionNet.loadFromUri('https://raw.githubusercontent.com/nightwarriorftw/face-detection-js/master/models'),
-  faceapi.nets.faceLandmark68Net.loadFromUri('https://raw.githubusercontent.com/nightwarriorftw/face-detection-js/master/models'),
-  faceapi.nets.ssdMobilenetv1.loadFromUri('https://raw.githubusercontent.com/nightwarriorftw/face-detection-js/master/models')
+  faceapi.nets.faceRecognitionNet.loadFromUri(modelURL),
+  faceapi.nets.faceLandmark68Net.loadFromUri(modelURL),
+  faceapi.nets.ssdMobilenetv1.loadFromUri(modelURL)
 ]).then(start)
 
 
@@ -62,7 +62,7 @@ async function start() {
 
 // function to parse all the names from the images
 function loadLabeledImages() {
-  const labels = ['Aditya', 'Bittu', 'Jhalani'];
+  const labels = ['Aditya', 'Bittu', 'Jhalani', 'TwilightBoy'];
 
   // return all the promises for returning all the images
   return Promise.all(
