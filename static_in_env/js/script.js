@@ -43,11 +43,20 @@ async function start() {
 
     const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
 
+    const customerNameField = document.getElementById('id_customer_name');
+
     // drawing the actual box for each face
     results.forEach((results, i) => {
       console.log(results.toString());
-      document.getElementById('id_customer_name').value = results.toString().split(' ')[0];
+      customerNameField.value = results.toString().split(' ')[0];
     });
+
+    if(customerNameField.value===""){
+      console.log('Customer not verified !!');
+      window.alert('Customer not verified !! Press ok to try again !!');
+      location.reload();
+    }
+    
   })
 }
 

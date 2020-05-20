@@ -5,39 +5,56 @@
 
   <main >
     <div class="container wow fadeIn">
-      <h2 class="my-5 h2 text-center">Checkout form</h2>
+      <h2 class="my-5 mx-1 h2">Checkout and Send money</h2>
       <div class="row">
         <div class="col-md-8 mb-4">
-          <div class="card">              
+          <div class="card">
+
+              <div style="display:flex; align-items: center; justify-content:center;">              
               	<div id="my_camera"></div>
-                <form method="POST">
-                <input type=button value="Configure" onClick="configure()">
-                <input type=button value="Take Snapshot" onClick="take_snapshot()">
-                <input type=button value="Send" id="startProcessing">
+              </div>
 
-                <div id="results"></div>
+                <div style="display:flex; align-items: center; justify-content:center;">
+                  <input type=button value="Configure" onClick="configure()" class="btn btn-warning float-left ml-2">
+                  <input type=button value="Take Snapshot" onClick="take_snapshot()" class="btn btn-primary float-left">
+                   <input class="btn btn-success float-left" type="button" id="startProcessing" value="Verify">
+                </div>
 
-                <input type="file" name="uploadImage" id="uploadImage" />
+                <div style="display:flex; align-items: center; justify-content:center; ">
+                  <div id="results"></div>
+                </div>
+                
+                <div style="display:flex; align-items: center; justify-content:center; ">
+                  <input type="file" name="uploadImage" id="uploadImage" style="visibility: hidden"/>
+                </div>
 
-              <div class="md-form mb-5">
-              <br>
-              <br>
-                  <span id='customer_name' name='customer_name'>{{form}}</span>
-              </div> 
+                <div style="display:flex; align-items: center; justify-content:center; flex-direction: column;">
+                 
+                  <div class="md-form mb-5">
+                    <br>
+                    <br>
+                    <span id='customer_name' name='customer_name'>{{form}}</span>
+                  </div> 
+                    <br>
+                  <div>
+                   <tr>
+                    <td colspan="4">Order Total</td>&nbsp
+                    <td><b>Rs {{ order.get_total }}</b></td>
+                  </tr>
+                  </div>
 
-              <form method="POST" class="card-body">
-                {% csrf_token %}
-              <hr class="mb-4">
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                  <form method="POST" class="card-body">
+                        {% csrf_token %}
+                      <hr class="mb-4">
+                      <button type="submit" class="btn btn-primary btn-lg btn-block">Proceed to Checkout</button>
+                  </form>
+                </div>
+              </div>
 
-              </form>
+            </div>
 
-          </div>
-
-        </div>
-
-        {% comment %} <div class="col-md-4 mb-4">
-          {% include "order_snippet.html" %}
+            {% comment %} <div class="col-md-4 mb-4">
+              {% include "order_snippet.html" %}
         </div> {% endcomment %}
 
       </div>
@@ -62,35 +79,14 @@
   Webcam.attach( '#my_camera' );
  }
 
-// function to convert DataURI to Blob
-function dataURItoBlob(dataURI) {
-    // convert base64/URLEncoded data component to raw binary data held in a string
-    var byteString;
-    if (dataURI.split(',')[0].indexOf('base64') >= 0)
-        byteString = atob(dataURI.split(',')[1]);
-    else
-        byteString = unescape(dataURI.split(',')[1]);
-
-    // separate out the mime component
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-    // write the bytes of the string to a typed array
-    var ia = new Uint8Array(byteString.length);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-
-    return new Blob([ia], {type:mimeString});
-}
-
  // A button for taking snaps
  function take_snapshot() {
+  
   // take snapshot and get image data
   Webcam.snap( function(data_uri) {
+  
   // display results in page
   document.getElementById('results').innerHTML = '<img src="'+data_uri+'" id="clickedImage">'
-  //let blob = dataURItoBlob(data_uri);
-  //console.log(blob);
   });
 
   Webcam.reset();

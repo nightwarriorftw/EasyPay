@@ -73,16 +73,6 @@ class CheckoutView(View):
             messages.warning(self.request, "You do not have an active order")
             return redirect("core:order-summary")
 
-@csrf_exempt
-def getUserID(request):
-    print('I am here')
-    if request.POST:
-        f = open(settings.MEDIA_ROOT + 'trash_data/newImage', 'wb')
-        f.write(request.body)
-        f.close()
-        return HttpResponse("/media/webcamimages/newImage")
-
-
 
 class PaymentView(View):
     def get(self, *args, **kwargs):
@@ -234,7 +224,6 @@ class OrderSummaryView(LoginRequiredMixin, View):
             context = {
                 'object': order,
             }
-            print('Ia m')
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
