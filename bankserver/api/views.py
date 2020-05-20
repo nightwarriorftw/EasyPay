@@ -14,23 +14,25 @@ class UserViewSets(viewsets.ModelViewSet):
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer
 
-class ValidationViewSets(APIView):
-    
+class ValidationViewSets(generics.UpdateAPIView):
+    queryset = UserModel.objects.all()
+    serializer_class = ValidationSerializer
+    permission_classes = (permissions.AllowAny,)
+
     def put(self, request, format=None):
         full_name = request.data['full_name']
         upi_key = request.data['upi_key']
         PIN = request.data['PIN']
         amount = request.data['amount']
-        snippet = UserMode.objects.filter(
-            full_name=full_name,
-            upi_key = upi_key,
-            PIN=PIN
-        )
-        if(snippet.balance >= amount):
-            snippet.balance = snippet.balance-amount
+        
+        instance = self.get_object()
+        if(instance.balance >= amount):
+            instance.balance = instance.balance-amount
+            instance.save()
+            serializer = self.get_serializer(instance)
+            serializer.is_valid(raise_exception=True)
+            self.perform_update(serializer)
+            return Response({'details': 'success', 'status': '200'})
         else:
             return Response({'details':'Insufficient Balance', 'status': '400'})
-        serializer = ValidationSerializer()
-        if serializer.is_valid():
-            print(serializer.data)
-            return Response({'details': 'success', 'status': '200'})
+        
