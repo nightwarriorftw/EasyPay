@@ -6,6 +6,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 
 SECRET_KEY = config('SECRET_KEY')
 
+ACCOUNT_SID = os.environ.get('ACCOUNT_SID')
+AUTH_TOKEN = os.environ.get('AUTH_TOKEN')
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,7 +29,9 @@ INSTALLED_APPS = [
     'bankserver',
 
     #custom
-    'rest_framework'
+    'rest_framework',
+    'phonenumber_field',
+
 ]
 
 MIDDLEWARE = [

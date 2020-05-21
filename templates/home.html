@@ -26,15 +26,6 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Fast Food</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">South Indian</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">North Indian</a>
-            </li>
 
           </ul>
           <!-- Links -->
@@ -72,16 +63,9 @@
                 <a href="" class="grey-text">
                   <h5>{{ item.get_category_display }}</h5>
                 </a>
-                <h5>
-                  <strong>
-                    <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
-                      <span class="badge badge-pill {{ item.get_label_display }}-color">NEW</span>
-                    </a>
-                  </strong>
-                </h5>
 
                 <h4 class="font-weight-bold blue-text">
-                  <strong>$
+                  <strong>Rs
                   {% if item.discount_price %}
                   {{ item.discount_price }}
                   {% else %}

@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .models import UserModel
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+from django.conf import settings
+import json, os
 
 from twilio.rest import Client
 
@@ -28,6 +29,24 @@ def UpdateUserBalance(full_name, upi_key, PIN, amount):
              if(obj.balance >= amount):
                 obj.balance = obj.balance-amount
                 obj.save()
+                print(obj.balance)
+                client = Client(settings.ACCOUNT_SID, settings.AUTH_TOKEN)
+                smsBody = "{name} your account has been debited by Rs {amount} after placing an order from Sbi-EasyPay".format(name=full_name, amount=amount)
+                smsPhone = "+{}{}".format(obj.phone_number.country_code,
+                                          obj.phone_number.national_number)
+                print(smsBody, smsPhone)
+                try:
+                    smsMessage = client.messages \
+                        .create(
+                            body=smsBody,
+                            from_=os.environ.get('TWILIO_PHONE_NUMBER'),
+                            to=smsPhone
+                        )
+                    print(smsMessage.sid)
+                    print('SMS send')
+
+                except:
+                    print('SMS send failed')
                 return {'detail':'success', 'status': 200}
         else:
             return {'detail': 'InvalidCredentials', 'status': 400}
