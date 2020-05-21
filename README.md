@@ -1,7 +1,7 @@
 # Easy Pay
 A Fast & Secure Facial Recognition Based Payment Solution Software
 
-[![Open Issues](https://img.shields.io/github/issues/nightwarriorftw/adopt-me?style=for-the-badge&logo=github)](https://github.com/nightwarriorftw/adopt-me/issues) [![Forks](https://img.shields.io/github/forks/nightwarriorftw/adopt-me?style=for-the-badge&logo=github)](https://github.com/nightwarriorftw/adopt-me/network/members) [![Stars](https://img.shields.io/github/stars/nightwarriorftw/adopt-me?style=for-the-badge&logo=reverbnation)](hhttps://github.com/nightwarriorftw/adopt-me/stargazers) ![Maintained](https://img.shields.io/maintenance/yes/2020?style=for-the-badge&logo=github)![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%99%A5-red?style=for-the-badge&logo=open-source-initiative) ![Built with Love](https://img.shields.io/badge/Built%20With-%E2%99%A5-critical?style=for-the-badge&logo=ko-fi)
+[![Open Issues](https://img.shields.io/github/issues/nightwarriorftw/EasyPay?style=for-the-badge&logo=github)](https://github.com/nightwarriorftw/EasyPay/issues) [![Forks](https://img.shields.io/github/forks/nightwarriorftw/EasyPay?style=for-the-badge&logo=github)](https://github.com/nightwarriorftw/EasyPay/network/members) [![Stars](https://img.shields.io/github/stars/nightwarriorftw/EasyPay?style=for-the-badge&logo=reverbnation)](hhttps://github.com/nightwarriorftw/EasyPay/stargazers) ![Maintained](https://img.shields.io/maintenance/yes/2020?style=for-the-badge&logo=github)![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%99%A5-red?style=for-the-badge&logo=open-source-initiative) ![Built with Love](https://img.shields.io/badge/Built%20With-%E2%99%A5-critical?style=for-the-badge&logo=ko-fi)
 
 
 ## :nut_and_bolt: Development
