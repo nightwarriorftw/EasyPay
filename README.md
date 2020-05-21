@@ -11,7 +11,7 @@ A Fast & Secure Facial Recognition Based Payment Solution Software
 
 ```Bash
 https://github.com/nightwarriorftw/EasyPay.git
-cd adopt-me
+cd EasyPay
 ```
 
 #### 2. Create a virtual environment
@@ -42,11 +42,11 @@ python manage.py runserver
 # :camera: Gallery
 
 Pictures of project.
-!(Front page)[./public/ss/1.jpeg]
-!(Front page)[./public/ss/2.png]
-!(Front page)[./public/ss/3.png]
-!(Front page)[./public/ss/4.png]
-!(Front page)[./public/ss/5.png]
+![front page]](./public/ss/1.jpeg)
+![1 page](./public/ss/2.png)
+![2 page](./public/ss/3.png)
+![3 page](./public/ss/4.png)
+![4 page](./public/ss/5.png)
 
 ## :star2: Credit/Acknowledgment
 
