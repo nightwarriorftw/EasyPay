@@ -9,9 +9,14 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm, RefundForm, PaymentForm
 from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile
+from django.http import HttpResponse
 
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+
+from bankserver.views import UpdateUserBalance
+
+import json
 
 import random
 import string
@@ -54,24 +59,32 @@ class CheckoutView(View):
             return redirect("core:checkout")
 
     def post(self, *args, **kwargs):
-        form = CheckoutForm(self.request.POST or None)
-        try:
+        response = UpdateUserBalance(
+            self.request.POST.get('customer_name'),
+            self.request.POST.get('customer_upi_key'),
+            self.request.POST.get('customer_upi_pin'),
+            self.request.POST.get('customer_amount')
+        )
+        print(response)
+
+        if response['status'] == 200:
             order = Order.objects.get(user=self.request.user, ordered=False)
-            if form.is_valid():
+            order_items = order.items.all()
+            order_items.update(ordered=True)
+            for item in order_items:
+                item.save()
+            order.customer_name=self.request.POST.get('full_name')
+            order.ordered = True
+            order.ref_code = create_ref_code()
+            order.save()
 
-                payment_option = form.cleaned_data.get('payment_option')
+            messages.success(self.request, "Your order was successful!")
+            return redirect("/")
+            
 
-                if payment_option == 'S':
-                    return redirect('core:payment', payment_option='stripe')
-                elif payment_option == 'P':
-                    return redirect('core:payment', payment_option='paypal')
-                else:
-                    messages.warning(
-                        self.request, "Invalid payment option selected")
-                    return redirect('core:checkout')
-        except ObjectDoesNotExist:
-            messages.warning(self.request, "You do not have an active order")
-            return redirect("core:order-summary")
+        messages.error(self.request, "Invalid credentials")
+        return redirect('core:checkout')
+            
 
 
 class PaymentView(View):
@@ -220,7 +233,8 @@ class HomeView(ListView):
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
-            order = Order.objects.get(user=self.request.user)
+            order = Order.objects.filter(user=self.request.user).last()
+            print(order)
             context = {
                 'object': order,
             }

@@ -14,7 +14,7 @@ class UserViewSets(viewsets.ModelViewSet):
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer
 
-class ValidationViewSets(generics.UpdateAPIView):
+class ValidationViewSets(generics.GenericAPIView):
     queryset = UserModel.objects.all()
     serializer_class = ValidationSerializer
     permission_classes = (permissions.AllowAny,)

@@ -27,7 +27,8 @@
                 <div style="display:flex; align-items: center; justify-content:center; ">
                   <input type="file" name="uploadImage" id="uploadImage" style="visibility: hidden"/>
                 </div>
-
+               <form method="POST" class="card-body">
+                    {% csrf_token %}
                 <div style="display:flex; align-items: center; justify-content:center; flex-direction: column;">
                  
                   <div class="md-form mb-5">
@@ -38,31 +39,32 @@
                   <div class="md-form mb-5">
                   <br>
                   <br>
-                  <span id="upi_key" name='customer_upi_key'>
-                      <label for='id_upi_key' class>Upi Key</label>
-                      <input type='text' name='customer_upi_key' id='id_upi_key'/ >
-                  </span> 
-                  </div>
+                   
+                    
+                    <span id="upi_key" name='customer_upi_key'>
+                        <label for='id_upi_key' class>Upi Key</label>
+                        <input type='text' name='customer_upi_key' id='id_upi_key'/ >
+                    </span> 
+                    </div>
 
-                  <div class="md-form mb-5">
-                  <br>
-                  <br>
-                  <span id="upi_pin" name='customer_upi_pin'>
-                      <label for='id_upi_pin' class>PIN</label>
-                      <input type='password' name='customer_upi_pin' id='id_upi_pin'/ >
-                  </span> 
-                  </div>
+                    <div class="md-form mb-5">
+                    <br>
+                    <br>
+                    <span id="upi_pin" name='customer_upi_pin'>
+                        <label for='id_upi_pin' class>PIN</label>
+                        <input type='password' name='customer_upi_pin' id='id_upi_pin'/ >
+                    </span> 
+                    </div>
 
-                  <br>
-                  <div>
-                   <tr>
-                    <td colspan="4">Order Total</td>&nbsp
-                    <td><b>Rs {{ order.get_total }}</b></td>
-                  </tr>
-                  </div>
-
-                  <form method="POST" class="card-body">
-                        {% csrf_token %}
+                    <br>
+                    
+                    <div>
+                    <span id="amount" name='customer_amount'>
+                        <label for='amount' class>Amount</label>
+                        <input style="border:hidden; font-weight: bold;" type='text' name='customer_amount' id='id_customer_amount'/  value="{{order.get_total}}">
+                    </span>
+                    </div>
+                       
                       <hr class="mb-4">
                       <button type="submit" class="btn btn-primary btn-lg btn-block">Proceed to Checkout</button>
                   </form>
