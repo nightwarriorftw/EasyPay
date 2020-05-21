@@ -41,11 +41,15 @@ python manage.py runserver
 
 # :camera: Gallery
 
-Pictures of project.
-![front page]](./public/ss/1.jpeg)
+- Front Page
+![front page](./public/ss/1.jpeg)
+- Login/Signup Page
 ![1 page](./public/ss/2.png)
+- Item Description
 ![2 page](./public/ss/3.png)
+- Order Summary
 ![3 page](./public/ss/4.png)
+- Checkout with FaceCam
 ![4 page](./public/ss/5.png)
 
 ## :star2: Credit/Acknowledgment
