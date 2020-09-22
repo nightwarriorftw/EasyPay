@@ -5,3 +5,4 @@ static_root
 env
 virtual/
 cred.sh
+.vscode/
