@@ -10,7 +10,7 @@ django-crispy-forms==1.7.2
 django-debug-toolbar==1.10.1
 django-phonenumber-field==4.0.0
 django-restframework==0.0.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 idna==2.8
 oauthlib==3.0.1
 pep8==1.7.1
