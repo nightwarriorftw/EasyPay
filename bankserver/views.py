@@ -8,7 +8,7 @@ import json, os
 from twilio.rest import Client
 
 @csrf_exempt
-def UpdateUserBalance(full_name, upi_key, PIN, amount):
+def UpdateUserBalance(full_name, upi_key, PIN, amount, image=None):
         # full_name = request.POST.get('full_name')
         # upi_key = request.POST.get('upi_key')
         # PIN = request.POST.get('PIN')
@@ -34,7 +34,7 @@ def UpdateUserBalance(full_name, upi_key, PIN, amount):
                 smsBody = "{name} your account has been debited by Rs {amount} after placing an order from Sbi-EasyPay".format(name=full_name, amount=amount)
                 smsPhone = "+{}{}".format(obj.phone_number.country_code,
                                           obj.phone_number.national_number)
-                print(smsBody, smsPhone)
+                print(smsBody)
                 try:
                     smsMessage = client.messages \
                         .create(
