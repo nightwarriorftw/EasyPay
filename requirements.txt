@@ -28,4 +28,4 @@ six==1.15.0
 sqlparse==0.4.1
 stripe==2.56.0
 twilio==6.55.0
-urllib3==1.26.4
+urllib3==1.26.5
