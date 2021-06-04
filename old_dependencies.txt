@@ -3,7 +3,7 @@ Babel==2.8.0
 certifi==2019.3.9
 chardet==3.0.4
 defusedxml==0.6.0
-Django==2.2.10
+Django==3.1.9
 django-allauth==0.39.1
 django-countries==5.3.3
 django-crispy-forms==1.7.2
